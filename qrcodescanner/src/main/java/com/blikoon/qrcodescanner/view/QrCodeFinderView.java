@@ -99,9 +99,9 @@ public final class QrCodeFinderView extends RelativeLayout {
         canvas.drawRect(0, frame.bottom + 1, width, height, mPaint);
 
         drawFocusRect(canvas, frame);
-        drawAngle(canvas, frame);
-        drawText(canvas, frame);
-        drawLaser(canvas, frame);
+//        drawAngle(canvas, frame);
+//        drawText(canvas, frame);
+//        drawLaser(canvas, frame);
 
         // Request another update at the animation interval, but only repaint the laser line,
         // not the entire viewfinder mask.

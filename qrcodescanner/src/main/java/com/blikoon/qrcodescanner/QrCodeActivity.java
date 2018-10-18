@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,13 +21,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.zxing.Result;
 import com.blikoon.qrcodescanner.camera.CameraManager;
 import com.blikoon.qrcodescanner.decode.CaptureActivityHandler;
 import com.blikoon.qrcodescanner.decode.DecodeImageCallback;
@@ -36,6 +31,7 @@ import com.blikoon.qrcodescanner.decode.DecodeImageThread;
 import com.blikoon.qrcodescanner.decode.DecodeManager;
 import com.blikoon.qrcodescanner.decode.InactivityTimer;
 import com.blikoon.qrcodescanner.view.QrCodeFinderView;
+import com.google.zxing.Result;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -43,7 +39,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 
-public class QrCodeActivity extends Activity implements Callback, OnClickListener {
+public class QrCodeActivity extends Activity implements Callback {
 
     private static final int REQUEST_SYSTEM_PICTURE = 0;
     private static final int REQUEST_PICTURE = 1;
@@ -55,7 +51,6 @@ public class QrCodeActivity extends Activity implements Callback, OnClickListene
     private InactivityTimer mInactivityTimer;
     private QrCodeFinderView mQrCodeFinderView;
     private SurfaceView mSurfaceView;
-    private View mLlFlashLight;
     private final DecodeManager mDecodeManager = new DecodeManager();
 
     private static final float BEEP_VOLUME = 0.10f;
@@ -64,8 +59,6 @@ public class QrCodeActivity extends Activity implements Callback, OnClickListene
     private boolean mPlayBeep;
     private boolean mVibrate;
     private boolean mNeedFlashLightOpen = true;
-    private ImageView mIvFlashLight;
-    private TextView mTvFlashLightText;
     private Executor mQrCodeExecutor;
     private Handler mHandler;
 
@@ -113,15 +106,9 @@ public class QrCodeActivity extends Activity implements Callback, OnClickListene
     }
 
     private void initView() {
-        TextView tvPic = (TextView) findViewById(R.id.qr_code_header_black_pic);
-        mIvFlashLight = (ImageView) findViewById(R.id.qr_code_iv_flash_light);
-        mTvFlashLightText = (TextView) findViewById(R.id.qr_code_tv_flash_light);
         mQrCodeFinderView = (QrCodeFinderView) findViewById(R.id.qr_code_view_finder);
         mSurfaceView = (SurfaceView) findViewById(R.id.qr_code_preview_view);
-        mLlFlashLight = findViewById(R.id.qr_code_ll_flash_light);
         mHasSurface = false;
-        mIvFlashLight.setOnClickListener(this);
-        tvPic.setOnClickListener(this);
     }
 
     private void initData() {
@@ -145,7 +132,6 @@ public class QrCodeActivity extends Activity implements Callback, OnClickListene
             return;
         }
         SurfaceHolder surfaceHolder = mSurfaceView.getHolder();
-        turnFlashLightOff();
         if (mHasSurface) {
             initCamera(surfaceHolder);
         } else {
@@ -214,7 +200,6 @@ public class QrCodeActivity extends Activity implements Callback, OnClickListene
         }
         mQrCodeFinderView.setVisibility(View.VISIBLE);
         mSurfaceView.setVisibility(View.VISIBLE);
-        mLlFlashLight.setVisibility(View.VISIBLE);
         findViewById(R.id.qr_code_view_background).setVisibility(View.GONE);
         if (mCaptureActivityHandler == null) {
             mCaptureActivityHandler = new CaptureActivityHandler(this);
@@ -279,10 +264,10 @@ public class QrCodeActivity extends Activity implements Callback, OnClickListene
         if (mPlayBeep && mMediaPlayer != null) {
             mMediaPlayer.start();
         }
-        if (mVibrate) {
-            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-            vibrator.vibrate(VIBRATE_DURATION);
-        }
+//        if (mVibrate) {
+//            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+//            vibrator.vibrate(VIBRATE_DURATION);
+//        }
     }
 
     /**
@@ -294,47 +279,11 @@ public class QrCodeActivity extends Activity implements Callback, OnClickListene
         }
     };
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.qr_code_iv_flash_light)
-        {
-            if (mNeedFlashLightOpen) {
-                    turnFlashlightOn();
-                } else {
-                    turnFlashLightOff();
-                }
-
-        }else if(v.getId() == R.id.qr_code_header_black_pic)
-        {
-            if (!hasCameraPermission()) {
-                    mDecodeManager.showPermissionDeniedDialog(this);
-                } else {
-                    openSystemAlbum();
-                }
-
-        }
-
-    }
-
     private void openSystemAlbum() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, REQUEST_SYSTEM_PICTURE);
-    }
-
-    private void turnFlashlightOn() {
-        mNeedFlashLightOpen = false;
-        mTvFlashLightText.setText(getString(R.string.qr_code_close_flash_light));
-        mIvFlashLight.setBackgroundResource(R.drawable.flashlight_turn_off);
-        CameraManager.get().setFlashLight(true);
-    }
-
-    private void turnFlashLightOff() {
-        mNeedFlashLightOpen = true;
-        mTvFlashLightText.setText(getString(R.string.qr_code_open_flash_light));
-        mIvFlashLight.setBackgroundResource(R.drawable.flashlight_turn_on);
-        CameraManager.get().setFlashLight(false);
     }
 
     private void handleResult(String resultString) {
