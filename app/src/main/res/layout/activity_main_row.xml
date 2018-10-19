@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:weightSum="10"
+        android:background="@drawable/activity_main_row_background"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:layout_margin="7dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp">
+
+        <ImageView
+            android:id="@+id/iv_is_open_network"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:src="@drawable/wifi_lock"
+            android:layout_marginEnd="10dp" />
+
+        <ImageView
+            android:id="@+id/iv_RSSI_level"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_weight="2" />
+
+        <TextView
+            android:id="@+id/tv_wifi_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:textSize="18sp"
+            android:textColor="#fefefe"
+            android:paddingEnd="14dp" />
+
+    </LinearLayout>
+</LinearLayout>
