@@ -16,33 +16,25 @@
         android:paddingStart="30dp"
         android:paddingEnd="30dp">
 
-        <ImageView
-            android:id="@+id/iv_activity_main_row_logo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:src="@drawable/wifi_lock"
-            android:layout_marginEnd="10dp" />
-
         <TextView
-            android:id="@+id/tv_activity_main_row_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="#fefefe"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_weight="2" />
-
-        <TextView
-            android:id="@+id/tv_activity_main_row_content"
+            android:id="@+id/tv_activity_wifi_row_connect_new_wifi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
             android:textSize="18sp"
             android:textColor="#fefefe"
             android:paddingEnd="14dp" />
+
+
+        <ImageView
+            android:id="@+id/iv_activity_wifi_row_connect_new_wifi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:src="@drawable/wifi_lock"
+            android:layout_marginEnd="10dp" />
 
     </LinearLayout>
 </LinearLayout>
