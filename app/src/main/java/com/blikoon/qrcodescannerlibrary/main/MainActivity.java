@@ -1,4 +1,4 @@
-package com.blikoon.qrcodescannerlibrary;
+package com.blikoon.qrcodescannerlibrary.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.blikoon.qrcodescannerlibrary.main.CustomAdapterMainActivity;
-import com.blikoon.qrcodescannerlibrary.main.DataModelMainActivity;
+import com.blikoon.qrcodescannerlibrary.R;
 import com.blikoon.qrcodescannerlibrary.wifi.WifiActivity;
 
 import java.util.ArrayList;

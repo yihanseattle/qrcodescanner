@@ -4,6 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blikoon.qrcodescannerlibrary.wifi.WifiActivity">
+    android:background="#000000"
+    tools:context="com.blikoon.qrcodescannerlibrary.wifi.WifiActivity"
+    >
+
+    <ListView
+        android:id="@+id/listview_activity_wifi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="50dp"
+        >
+    </ListView>
 
 </android.support.constraint.ConstraintLayout>

@@ -22,9 +22,11 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+            android:textColor="#fefefe"
+            android:text="Wi-Fi"
             android:layout_weight="6" />
 
-        <ToggleButton
+        <Switch
             android:id="@+id/tb_activity_wifi_row_main_switch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

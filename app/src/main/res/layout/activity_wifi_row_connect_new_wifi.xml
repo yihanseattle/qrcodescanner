@@ -23,6 +23,7 @@
             android:layout_weight="7"
             android:textSize="18sp"
             android:textColor="#fefefe"
+            android:text="Connect to new"
             android:paddingEnd="14dp" />
 
 
@@ -33,7 +34,7 @@
             android:layout_weight="3"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:src="@drawable/wifi_lock"
+            android:src="@drawable/flashlight_turn_off"
             android:layout_marginEnd="10dp" />
 
     </LinearLayout>
